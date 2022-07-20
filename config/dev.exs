@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :discuss, Discuss.Repo,
-  username: "postgres",
-  password: "qwerty",
+  username: "daria",
+  password: "",
   hostname: "localhost",
-  database: "elixir_forum",
+  database: "discuss_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

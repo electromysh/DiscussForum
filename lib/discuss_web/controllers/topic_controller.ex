@@ -7,12 +7,12 @@ defmodule DiscussWeb.TopicController  do
   plug :check_topic_owner when action in [:update, :edit, :delete]
 
   def index(conn, _params) do
-    IO.inspect(conn.assigns)
     topics = Discuss.Repo.all(Topic)
     render conn, "index.html", topics: topics
   end
 
   def show(conn, %{"id" => topic_id}) do
+    IO.inspect topic_id, label: :topic_id
     topic = Discuss.Repo.get!(Topic, topic_id)
     render conn, "show.html", topic: topic
   end

@@ -7,13 +7,13 @@ defmodule DiscussWeb.CommentsChannel do
     topic_id = String.to_integer(topic_id)
     topic = Topic
       |> Discuss.Repo.get(topic_id)
-      |> Discuss.Repo.preload(:comments)
+      |> Discuss.Repo.preload(comments: [:user])
 
     {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}
   end
 
    @impl true
-   def handle_in(name, %{"content" => content}, socket) do
+   def handle_in(_name, %{"content" => content}, socket) do
     topic = socket.assigns.topic
     user_id = socket.assigns.user_id
 
@@ -30,9 +30,4 @@ defmodule DiscussWeb.CommentsChannel do
         {:reply, {:error, %{errors: changeset}}, socket}
     end
    end
-
-  # # Add authorization logic here as required.
-  # defp authorized?(_payload) do
-  #   true
-  # end
 end
